@@ -1,0 +1,70 @@
+{
+  "name": "todo",
+  "displayName": "todo",
+  "description": "Don't forget about those darn TODO comments",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.89.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.scanTODOs"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.scanTODOs",
+        "title": "Scan TODOs"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "todoView",
+          "name": "TODOs"
+        }
+      ]
+    },
+    "configuration": {
+      "type": "object",
+      "title": "TODO Extension Configuration",
+      "properties": {
+        "todo.exclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "**/node_modules/**"
+          ],
+          "description": "List of paths or glob patterns to exclude from TODO scan."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.89.0",
+    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/parser": "^7.7.1",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.3.9",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "p-limit": "^2.3.0"
+  }
+}
